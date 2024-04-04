@@ -3,10 +3,9 @@ package com.example.demo.controller.reservation;
 import com.example.demo.controller.reservation.dto.response.AvailableSeatResponse;
 import com.example.demo.domain.reservation.service.ReservationService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,5 +19,11 @@ public class ReservationController {
     @GetMapping("/showId}/seats")
     public List<AvailableSeatResponse> getAvailableSeats(@PathVariable String showId){
         return List.of(new AvailableSeatResponse("1","1"));
+    }
+
+
+    @PostMapping("/showId}/seats/{seatId}")
+    public ResponseEntity<Void> reserveSeat(@PathVariable String seatId){
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

@@ -9,3 +9,153 @@
 ![concert_erd.drawio.png](..%2Fconcert_erd.drawio.png)
 
 ## API 명세
+
+## 토큰 발급 API
+
+HTTP METHOD  URL
+
+POST /api/v1/users/{userId}/token
+
+Response
+
+{
+
+“token”: “asdfasdfasdfs…”
+
+}
+
+## 예약 가능한 날짜 조회 API
+
+HTTP METHOD  URL
+
+GET /api/v1/concerts/{concertId}/shows
+
+HEADER
+
+Authorization : Bearer sadfsdfsdf
+
+Response
+
+[
+
+{
+
+“showId”: “1”,
+
+“showDate”: “ 2024-01-01”
+
+},
+
+{
+
+“showId”: “2”,
+
+“showDate”: “ 2024-01-02”
+
+}
+
+]
+
+## 예약 가능한 좌석 조회 API
+
+HTTP METHOD  URL
+
+GET /api/v1/shows/{showId}/seats
+
+HEADER
+
+Authorization : Bearer sadfsdfsdf
+
+Response
+
+[
+
+{
+
+“seatId”: “1”,
+
+“seatDate”: “ 1”
+
+},
+
+{
+
+“seatId”: “2”,
+
+“seatNumber: “ 2”
+
+}
+
+]
+
+## 좌석 예약 조회 API
+
+HTTP METHOD  URL
+
+POST /api/v1/shows/{showId}/seats/{seatId}
+
+HEADER
+
+Authorization : Bearer sadfsdfsdf
+
+Response
+
+{
+
+200 OK
+
+}
+
+## 잔액 조회 API
+
+HTTP METHOD  URL
+
+GET /api/v1/users/{userId}/balance
+
+HEADER
+
+Authorization : Bearer sadfsdfsdf
+
+Response
+
+{
+
+“amount” : “10000”
+
+}
+
+## 잔액 충전 API
+
+HTTP METHOD  URL
+
+POST /api/v1/users/{userId}/balance
+
+HEADER
+
+Authorization : Bearer sadfsdfsdf
+
+Response
+
+{
+
+“amount” : “10000”
+
+}
+
+## 결제  API
+
+HTTP METHOD  URL
+
+POST /api/v1/users/{userId}/payments
+
+HEADER
+
+Authorization : Bearer sadfsdfsdf
+
+Response
+
+{
+
+“amount” : “10000”
+
+}

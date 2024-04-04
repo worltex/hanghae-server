@@ -74,7 +74,7 @@ Response
 
 “seatId”: “1”,
 
-“seatDate”: “ 1”
+“seatNumber”: “ 1”
 
 },
 

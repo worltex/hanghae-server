@@ -17,12 +17,13 @@ HTTP METHOD  URL
 POST /api/v1/users/{userId}/token
 
 Response
-
+``` json
 {
 
 “token”: “asdfasdfasdfs…”
 
 }
+``` 
 
 ## 예약 가능한 날짜 조회 API
 
@@ -33,7 +34,7 @@ GET /api/v1/concerts/{concertId}/shows
 HEADER
 
 Authorization : Bearer sadfsdfsdf
-
+``` json
 Response
 
 [
@@ -55,7 +56,7 @@ Response
 }
 
 ]
-
+```
 ## 예약 가능한 좌석 조회 API
 
 HTTP METHOD  URL
@@ -67,7 +68,7 @@ HEADER
 Authorization : Bearer sadfsdfsdf
 
 Response
-
+``` json
 [
 
 {
@@ -87,7 +88,7 @@ Response
 }
 
 ]
-
+```
 ## 좌석 예약 조회 API
 
 HTTP METHOD  URL
@@ -99,12 +100,13 @@ HEADER
 Authorization : Bearer sadfsdfsdf
 
 Response
-
+``` json
 {
 
 200 OK
 
 }
+```
 
 ## 잔액 조회 API
 
@@ -117,13 +119,13 @@ HEADER
 Authorization : Bearer sadfsdfsdf
 
 Response
-
+``` json
 {
 
 “amount” : “10000”
 
 }
-
+```
 ## 잔액 충전 API
 
 HTTP METHOD  URL
@@ -133,7 +135,7 @@ POST /api/v1/users/{userId}/balance
 HEADER
 
 Authorization : Bearer sadfsdfsdf
-
+``` json
 Response
 
 {
@@ -141,7 +143,7 @@ Response
 “amount” : “10000”
 
 }
-
+```
 ## 결제  API
 
 HTTP METHOD  URL
@@ -153,9 +155,10 @@ HEADER
 Authorization : Bearer sadfsdfsdf
 
 Response
-
+``` json
 {
 
 “amount” : “10000”
 
 }
+```

@@ -135,8 +135,9 @@ POST /api/v1/users/{userId}/balance
 HEADER
 
 Authorization : Bearer sadfsdfsdf
-``` json
+
 Response
+``` json
 
 {
 

@@ -1,0 +1,11 @@
+## 마일스톤
+![마일스톤.png](..%2F%EB%A7%88%EC%9D%BC%EC%8A%A4%ED%86%A4.png)
+
+## 시퀀스 다이어그램
+![콘서트 시퀀스 다이어그램.drawio.png](..%2F%EC%BD%98%EC%84%9C%ED%8A%B8%20%EC%8B%9C%ED%80%80%EC%8A%A4%20%EB%8B%A4%EC%9D%B4%EC%96%B4%EA%B7%B8%EB%9E%A8.drawio.png)
+
+
+## ERD
+![concert_erd.drawio.png](..%2Fconcert_erd.drawio.png)
+
+## API 명세

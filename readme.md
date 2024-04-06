@@ -34,9 +34,8 @@ GET /api/v1/concerts/{concertId}/shows
 HEADER
 
 Authorization : Bearer sadfsdfsdf
-``` json
 Response
-
+``` json
 [
 
 {

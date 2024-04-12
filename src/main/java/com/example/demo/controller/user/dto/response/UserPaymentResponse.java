@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserBalanceResponse {
+public class UserPaymentResponse {
     private Long userId;
     private BigDecimal amount;
 }

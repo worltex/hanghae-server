@@ -50,7 +50,7 @@ public class UserController {
     @Operation(summary = "잔고 충전")
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(array = @ArraySchema(schema = @Schema(implementation = AvailableSeatResponse.class))))
     @Parameters({
-            @Parameter()
+            @Parameter(name="userId", required = true, schema=@Schema(type="string"), in= ParameterIn.PATH)
     })
     @PatchMapping("/{userId}/balance")
     public UserBalanceResponse chargeBalance(@PathVariable Long userId, UserBalanceUpdateRequest request){
@@ -59,6 +59,10 @@ public class UserController {
 
     @Operation(summary = "좌석 결제")
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(array = @ArraySchema(schema = @Schema(implementation = AvailableSeatResponse.class))))
+    @Parameters({
+            @Parameter(name="userId", required = true, schema=@Schema(type="string"), in= ParameterIn.PATH),
+            @Parameter(name="paymentId", required = true, schema=@Schema(type="string"), in= ParameterIn.PATH)
+    })
     @PostMapping("/{userId}/payments/{paymentId}")
     public UserPaymentResponse pay(@PathVariable Long userId, @PathVariable Long paymentId){
         return paymentService.pay(userId, paymentId);

@@ -7,6 +7,7 @@ import com.example.demo.domain.concert.service.ConcertService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -29,7 +30,7 @@ public class ConcertController {
     @Operation(summary = "콘서트 회차 목록 조회")
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(array = @ArraySchema(schema = @Schema(implementation = ShowDateResponse.class))))
     @Parameters({
-            @Parameter()
+            @Parameter(name="concertId", required = true, schema=@Schema(type="string"), in= ParameterIn.PATH),
     })
     @GetMapping("/{concertId}/shows")
     public List<ShowDateResponse> getAvailableShowDates(@PathVariable Long concertId){
@@ -40,7 +41,8 @@ public class ConcertController {
     @Operation(summary = "좌석 목록 조회")
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(array = @ArraySchema(schema = @Schema(implementation = AvailableSeatResponse.class))))
     @Parameters({
-            @Parameter()
+            @Parameter(name="concertId", required = true, schema=@Schema(type="string"), in= ParameterIn.PATH),
+            @Parameter(name="showId", required = true, schema=@Schema(type="string"), in= ParameterIn.PATH)
     })
     @GetMapping("/{concertId}/shows/{showId}/seats")
     public List<AvailableSeatResponse> getAvailableSeats(@PathVariable Long concertId, @PathVariable Long showId){

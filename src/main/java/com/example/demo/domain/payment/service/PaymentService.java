@@ -1,9 +1,11 @@
-package com.example.demo.domain.user.service;
+package com.example.demo.domain.payment.service;
 
 import com.example.demo.controller.user.dto.response.UserPaymentResponse;
 import com.example.demo.domain.payment.entity.Payment;
 import com.example.demo.domain.user.entity.User;
-import com.example.demo.domain.user.repository.PaymentRepository;
+import com.example.demo.domain.payment.repository.PaymentRepository;
+import com.example.demo.domain.payment.validator.PaymentValidator;
+import com.example.demo.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

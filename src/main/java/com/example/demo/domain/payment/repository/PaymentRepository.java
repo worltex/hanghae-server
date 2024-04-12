@@ -1,4 +1,4 @@
-package com.example.demo.domain.user.repository;
+package com.example.demo.domain.payment.repository;
 
 import com.example.demo.domain.payment.entity.Payment;
 import com.example.demo.domain.user.entity.User;

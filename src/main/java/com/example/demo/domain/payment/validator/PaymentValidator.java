@@ -1,10 +1,7 @@
-package com.example.demo.domain.user.service;
+package com.example.demo.domain.payment.validator;
 
 import com.example.demo.domain.payment.entity.Payment;
-import com.example.demo.domain.user.repository.PaymentRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 

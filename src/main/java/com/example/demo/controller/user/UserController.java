@@ -3,13 +3,11 @@ package com.example.demo.controller.user;
 import com.example.demo.controller.user.dto.request.UserBalanceUpdateRequest;
 import com.example.demo.controller.user.dto.response.UserBalanceResponse;
 import com.example.demo.controller.user.dto.response.UserPaymentResponse;
-import com.example.demo.domain.user.service.PaymentService;
+import com.example.demo.domain.payment.service.PaymentService;
 import com.example.demo.domain.user.service.UserService;
 import com.example.demo.domain.waiting.service.WaitingQueueService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
-import java.math.BigDecimal;
 
 @RestController
 @RequestMapping("/api/v1/users")

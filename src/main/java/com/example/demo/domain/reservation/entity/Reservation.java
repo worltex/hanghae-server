@@ -1,11 +1,10 @@
 package com.example.demo.domain.reservation.entity;
 
 import com.example.demo.domain.BaseEntity;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.example.demo.domain.concert.entity.Seat;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -14,6 +13,7 @@ import java.time.ZonedDateTime;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @DynamicUpdate
+@Getter
 public class Reservation extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,7 +21,9 @@ public class Reservation extends BaseEntity {
     private Long userId;
     private Long concertId;
     private Long showId;
-    private Long seatId;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "seat_id")
+    private Seat seat;
     private String status;
     private ZonedDateTime reservedAt;
 

@@ -9,6 +9,7 @@ import com.example.demo.domain.concert.validator.ShowValidator;
 import com.example.demo.domain.reservation.service.ReservationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Set;
@@ -21,12 +22,14 @@ public class ConcertService {
     private final HallService hallService;
     private final ConcertRepository concertRepository;
 
+    @Transactional(readOnly = true)
     public List<Show> getShowDates(Long concertId) {
         List<Show> showDateList= getConcert(concertId).getShowDateList();
         showValidator.validShow(showDateList);
         return showDateList;
     }
 
+    @Transactional(readOnly = true)
     public List<AvailableSeatResponse> getAvailableSeats(Long concertId, Long showId) {
         Long hallId  = getConcert(concertId).getHallId();
         List<Seat> allSeats = hallService.getAllSeats(hallId);
@@ -36,7 +39,7 @@ public class ConcertService {
         return allSeats.stream().map(seat-> new AvailableSeatResponse(seat.getSeatId(), seat.getSeatNum(), reveredSeats.contains(seat.getSeatId()))).toList();
     }
 
-    private Concert getConcert(Long concertId) {
+    public Concert getConcert(Long concertId) {
         return concertRepository.findByConcertId(concertId)
                 .orElseThrow(()->new RuntimeException("콘서트 정보를 조회할 수 없습니다."));
     }

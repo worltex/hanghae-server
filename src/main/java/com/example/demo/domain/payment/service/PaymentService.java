@@ -8,6 +8,7 @@ import com.example.demo.domain.payment.validator.PaymentValidator;
 import com.example.demo.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 
@@ -19,7 +20,7 @@ public class PaymentService {
     private final PaymentRepository paymentRepository;
     private final UserService userService;
 
-
+    @Transactional
     public UserPaymentResponse pay(Long userId, Long paymentId) {
         Payment payment = paymentRepository.findByPaymentId(paymentId)
                 .orElseThrow(() -> new RuntimeException("결제를 진행할 수 없습니다."));

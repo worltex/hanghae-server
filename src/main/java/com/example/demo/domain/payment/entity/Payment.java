@@ -1,4 +1,4 @@
-package com.example.demo.domain.reservation.entity;
+package com.example.demo.domain.payment.entity;
 
 import com.example.demo.domain.BaseEntity;
 import jakarta.persistence.Entity;
@@ -14,15 +14,12 @@ import java.time.ZonedDateTime;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @DynamicUpdate
-public class Reservation extends BaseEntity {
+public class Payment extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long paymentId;
     private Long reservationId;
-    private Long userId;
-    private Long concertId;
-    private Long showId;
-    private Long seatId;
+    private Long paymentPrice;
     private String status;
-    private ZonedDateTime reservedAt;
-
+    private ZonedDateTime paidAt;
 }

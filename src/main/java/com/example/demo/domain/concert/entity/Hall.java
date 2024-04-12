@@ -14,18 +14,19 @@ import java.util.List;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @DynamicUpdate
-public class Concert extends BaseEntity {
+public class Hall extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long concertId;
-
-    @Column(nullable = false, length = 50)
-    private String name;
-
     private Long hallId;
 
+    @Column(nullable = false)
+    private String name;
+
+    @Column(nullable = false)
+    private int seatCount;
+
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "show_id")
-    private List<Show> showDateList = new ArrayList();
+    @JoinColumn(name = "seat_id")
+    private List<Seat> seatList = new ArrayList();
 }

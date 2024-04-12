@@ -1,4 +1,4 @@
-package com.example.demo.domain.reservation.entity;
+package com.example.demo.domain.user.entity;
 
 import com.example.demo.domain.BaseEntity;
 import jakarta.persistence.Entity;
@@ -9,20 +9,14 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicUpdate;
 
-import java.time.ZonedDateTime;
-
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @DynamicUpdate
-public class Reservation extends BaseEntity {
+public class User extends BaseEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long reservationId;
     private Long userId;
-    private Long concertId;
-    private Long showId;
-    private Long seatId;
-    private String status;
-    private ZonedDateTime reservedAt;
 
+    private Long balance;
 }

@@ -23,6 +23,9 @@ public class UserService {
 
     @Transactional
     public UserBalanceResponse chargeBalance(Long userId, BigDecimal amount) {
+        if(amount.compareTo(BigDecimal.valueOf(0))<0){
+            throw new RuntimeException("1원 이상 충전 가능합니다.");
+        }
         User user = userRepository.findByUserId(userId).orElseThrow(() -> new RuntimeException("사용자를 찾을 수 없습니다."));
         user.updateBalance(amount);
         return new UserBalanceResponse(user.getUserId(),user.getBalance());

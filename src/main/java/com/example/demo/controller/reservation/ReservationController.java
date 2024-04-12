@@ -16,12 +16,6 @@ public class ReservationController {
 
     private final ReservationService reservationService;
 
-    @GetMapping("/{showId}/seats")
-    public List<AvailableSeatResponse> getAvailableSeats(@PathVariable String showId){
-        return List.of(new AvailableSeatResponse("1","1"));
-    }
-
-
     @PostMapping("/{showId}/seats/{seatId}")
     public ResponseEntity<Void> reserveSeat(@PathVariable String seatId){
         return new ResponseEntity<>(HttpStatus.OK);

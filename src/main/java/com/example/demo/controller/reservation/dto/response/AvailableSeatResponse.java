@@ -9,6 +9,7 @@ import java.time.ZonedDateTime;
 @AllArgsConstructor
 public class AvailableSeatResponse {
 
-    private String seatId;
-    private String seatNumber;
+    private Long seatId;
+    private int seatNumber;
+    private Boolean isReserved;
 }

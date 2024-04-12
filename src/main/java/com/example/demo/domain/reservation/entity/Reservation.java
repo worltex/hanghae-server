@@ -4,6 +4,7 @@ import com.example.demo.domain.BaseEntity;
 import com.example.demo.domain.concert.entity.Seat;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicUpdate;
@@ -14,6 +15,7 @@ import java.time.ZonedDateTime;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @DynamicUpdate
 @Getter
+@AllArgsConstructor
 public class Reservation extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

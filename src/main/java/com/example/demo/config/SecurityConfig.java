@@ -17,7 +17,7 @@ public class SecurityConfig {
                 .csrf(csrf->csrf.disable())// H2 콘솔 사용을 위한 설정
                 .headers(headers -> headers.frameOptions().disable())  // Disable frame options globally
                 .authorizeHttpRequests(requests ->
-                        requests.requestMatchers("/", "/swagger-ui/**").permitAll()	// requestMatchers의 인자로 전달된 url은 모두에게 허용
+                        requests.requestMatchers("/", "/swagger-ui/**", "/v3/**").permitAll()	// requestMatchers의 인자로 전달된 url은 모두에게 허용
                                 .requestMatchers(PathRequest.toH2Console()).permitAll()	// H2 콘솔 접속은 모두에게 허용
                                 .anyRequest().authenticated()	// 그 외의 모든 요청은 인증 필요
                 )

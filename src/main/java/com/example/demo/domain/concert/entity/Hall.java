@@ -3,6 +3,7 @@ package com.example.demo.domain.concert.entity;
 import com.example.demo.domain.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicUpdate;
@@ -14,6 +15,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @DynamicUpdate
+@AllArgsConstructor
 public class Hall extends BaseEntity {
 
     @Id

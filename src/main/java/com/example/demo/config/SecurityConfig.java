@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -16,11 +17,10 @@ public class SecurityConfig {
                 .authorizeRequests()
                 // 특정 API에 대해 모든 사용자에게 접근 허용
                 .requestMatchers("/**").permitAll()
-                // --------------------------------------------
                 .anyRequest().authenticated(); // 나머지 API에 대해서는 인증을 요구
         http
-                .cors(cors -> cors.disable())
-                .csrf(csrf -> csrf.disable());
+                .cors(AbstractHttpConfigurer::disable)
+                .csrf(AbstractHttpConfigurer::disable);
 
         return http.build();
     }

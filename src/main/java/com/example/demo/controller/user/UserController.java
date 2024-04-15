@@ -1,10 +1,12 @@
 package com.example.demo.controller.user;
 
+import com.example.demo.aop.RequireValidToken;
 import com.example.demo.controller.reservation.dto.response.AvailableSeatResponse;
 import com.example.demo.controller.user.dto.request.UserBalanceUpdateRequest;
 import com.example.demo.controller.user.dto.response.UserBalanceResponse;
 import com.example.demo.controller.user.dto.response.UserPaymentResponse;
 import com.example.demo.domain.payment.service.PaymentService;
+import com.example.demo.domain.token.JwtService;
 import com.example.demo.domain.user.service.UserService;
 import com.example.demo.domain.waiting.service.WaitingQueueService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -27,6 +29,8 @@ public class UserController {
     private final UserService userService;
     private final PaymentService paymentService;
 
+    private final JwtService jwtService;
+
     @Operation(summary = "토큰 발급")
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(array = @ArraySchema(schema = @Schema(implementation = AvailableSeatResponse.class))))
     @Parameters({
@@ -34,7 +38,7 @@ public class UserController {
     })
     @PostMapping("/{userId}/token")
     public String createToken(@PathVariable Long userId){
-        return "token";
+        return jwtService.createToken(userId);
     }
 
     @Operation(summary = "잔액 조회")
@@ -63,6 +67,7 @@ public class UserController {
             @Parameter(name="userId", required = true, schema=@Schema(type="string"), in= ParameterIn.PATH),
             @Parameter(name="paymentId", required = true, schema=@Schema(type="string"), in= ParameterIn.PATH)
     })
+    @RequireValidToken
     @PostMapping("/{userId}/payments/{paymentId}")
     public UserPaymentResponse pay(@PathVariable Long userId, @PathVariable Long paymentId){
         return paymentService.pay(userId, paymentId);

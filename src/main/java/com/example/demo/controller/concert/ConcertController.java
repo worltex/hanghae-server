@@ -1,5 +1,6 @@
 package com.example.demo.controller.concert;
 
+import com.example.demo.aop.RequireValidToken;
 import com.example.demo.controller.concert.dto.response.ShowDateResponse;
 import com.example.demo.controller.reservation.dto.response.AvailableSeatResponse;
 import com.example.demo.domain.concert.entity.Show;
@@ -32,6 +33,7 @@ public class ConcertController {
     @Parameters({
             @Parameter(name="concertId", required = true, schema=@Schema(type="string"), in= ParameterIn.PATH),
     })
+    @RequireValidToken
     @GetMapping("/{concertId}/shows")
     public List<ShowDateResponse> getAvailableShowDates(@PathVariable Long concertId){
         List<Show> showDates = concertService.getShowDates(concertId);
@@ -44,6 +46,7 @@ public class ConcertController {
             @Parameter(name="concertId", required = true, schema=@Schema(type="string"), in= ParameterIn.PATH),
             @Parameter(name="showId", required = true, schema=@Schema(type="string"), in= ParameterIn.PATH)
     })
+    @RequireValidToken
     @GetMapping("/{concertId}/shows/{showId}/seats")
     public List<AvailableSeatResponse> getAvailableSeats(@PathVariable Long concertId, @PathVariable Long showId){
        return concertService.getAvailableSeats(concertId, showId);

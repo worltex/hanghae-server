@@ -1,6 +1,12 @@
 server:
   port: 8080 # 내장 톰캣 포트번호
 
+jwt:
+  exp:
+    time: 300
+  key:
+    secret: test
+
 spring:
   mvc:
     pathmatch:

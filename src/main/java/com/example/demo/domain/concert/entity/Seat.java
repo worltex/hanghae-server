@@ -27,6 +27,8 @@ public class Seat extends BaseEntity {
     @Column(nullable = false)
     private BigDecimal price = BigDecimal.ZERO;
 
+    private String status;
+
     public Seat(Long seatId, int seatNum, BigDecimal price) {
         this.seatId = seatId;
         this.seatNum = seatNum;

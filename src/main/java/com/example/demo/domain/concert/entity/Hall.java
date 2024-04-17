@@ -23,12 +23,12 @@ public class Hall extends BaseEntity {
     private Long hallId;
 
     @Column(nullable = false)
-    private String name;
+    private String hallName;
 
     @Column(nullable = false)
     private int seatCount;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "seat_id")
-    private List<Seat> seatList = new ArrayList();
+    private List<Seat> seatList = new ArrayList<>();
 }

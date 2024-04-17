@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ReservationRepository extends JpaRepository<Reservation,Long> {
-    List<Reservation> findAllByShow_ShowIdAndStatusIn(Long showId, List<String> status);
+    List<Reservation> findAllByShowIdAndStatusIn(Long showId, List<String> status);
 
-    Optional<Reservation> findByShow_ShowIdAndSeat_SeatId(Long showId, Long seatId);
+    Optional<Reservation> findByShowIdAndSeatId(Long showId, Long seatId);
 }

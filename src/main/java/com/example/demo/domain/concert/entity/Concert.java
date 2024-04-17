@@ -23,11 +23,11 @@ public class Concert extends BaseEntity {
     private Long concertId;
 
     @Column(nullable = false, length = 50)
-    private String name;
+    private String concertName;
 
     private Long hallId;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "show_id")
-    private List<Show> showDateList = new ArrayList();
+    private List<Show> showDateList = new ArrayList<>();
 }

@@ -6,6 +6,7 @@ import com.example.demo.exception.TicketingErrorCode;
 import com.example.demo.exception.TicketingException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -19,43 +20,28 @@ import java.util.List;
 public class TokenScheduler {
 
     private final TokenRepository tokenRepository;
-    private final long MAX_ACTIVE=50;
+    @Value("${token.maxActiveUser:50}")
+    private int MAX_ACTIVE_USER;
 
     @Scheduled(cron = "0 * * * * *")
     @Transactional
     public void updateToken() {
-        long activeCount = tokenRepository.getProgressStatusCount("ACTIVE");
-        long waitCount = tokenRepository.getProgressStatusCount("WAIT");
+        int activeCount = tokenRepository.getProgressStatusCount("ACTIVE").intValue();
+        int waitCount = tokenRepository.getProgressStatusCount("WAIT").intValue();
 
-        int availableSlots = (int) (MAX_ACTIVE - activeCount);
+        int availableSlots = MAX_ACTIVE_USER - activeCount;
         if(availableSlots>0){
-            updateTokensToActive(Math.min(availableSlots, (int) waitCount));
-        }
-
-        if(activeCount < MAX_ACTIVE) {
-            int availableCount = (int) (MAX_ACTIVE - activeCount);
-
-            for(int i = 0; i<Math.min(availableCount, waitCount); i++) {
-                long nextWaitNo = tokenRepository.getNextPriorityWaitNumber("WAIT"); // 가장 우선인 다음 대기순번 고객
-
-                Token token = tokenRepository.findByWaitNo(nextWaitNo).orElseThrow(()->new TicketingException(TicketingErrorCode.USER_NOT_FOUND));
-
-                token.setExpiredAtAndStatus(ZonedDateTime.now().plusMinutes(10)
-                        , "ACTIVE");
-
-            }
+            updateTokensToActive(Math.min(availableSlots, waitCount));
         }
     }
 
     public void updateTokensToActive(int count) {
         Pageable pageable = PageRequest.of(0, count);
         List<Token> waitListTokens = tokenRepository.findAllTokensToActivate("WAIT", pageable);
-        for (Token token : waitListTokens) {
-            activateToken(token);
-        }
+        waitListTokens.forEach(this::activateToken);
     }
 
-    private void activateToken(Token token) {
+    public void activateToken(Token token) {
         try {
             token.setExpiredAtAndStatus(ZonedDateTime.now().plusMinutes(10), "ACTIVE");
             tokenRepository.save(token); // 상태 변경을 DB에 반영

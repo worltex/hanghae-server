@@ -7,6 +7,9 @@ jwt:
   key:
     secret: test
 
+token:
+  maxActiveUser: 50
+
 spring:
   mvc:
     pathmatch:

@@ -1,10 +1,8 @@
 package com.example.demo.domain.concert.service;
 
 import com.example.demo.controller.reservation.dto.response.AvailableSeatResponse;
-import com.example.demo.domain.concert.entity.Concert;
 import com.example.demo.domain.concert.entity.Seat;
 import com.example.demo.domain.concert.entity.Show;
-import com.example.demo.domain.concert.repository.ConcertRepository;
 import com.example.demo.domain.concert.validator.ShowValidator;
 import com.example.demo.domain.reservation.service.ReservationService;
 import lombok.RequiredArgsConstructor;

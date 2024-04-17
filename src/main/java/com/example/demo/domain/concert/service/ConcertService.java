@@ -27,6 +27,7 @@ public class ConcertService {
         return showDateList;
     }
 
+    //TODO 변경
     @Transactional(readOnly = true)
     public List<AvailableSeatResponse> getAvailableSeats(Long concertId, Long showId) {
         Long hallId  = concertReaderService.findByConcertId(concertId).getHallId();

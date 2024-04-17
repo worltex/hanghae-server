@@ -30,6 +30,8 @@ public class ReservationController {
     })
     @RequireValidToken
     @PostMapping("/{showId}/seats/{seatId}")
+
+    //TODO 변경
     public ResponseEntity<Void> reserveSeat(@PathVariable Long showId, @PathVariable Long seatId){
         Long userId=1L;
         Long concertId=1L;

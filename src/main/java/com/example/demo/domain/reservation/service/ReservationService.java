@@ -29,6 +29,7 @@ public class ReservationService {
     }
 
     @Transactional
+    //TODO event 발행
     public void reserveSeat(Long concertId, Long showId, Long seatId, Long userId) {
         reservationValidator.isReserved(showId,seatId);
         try{

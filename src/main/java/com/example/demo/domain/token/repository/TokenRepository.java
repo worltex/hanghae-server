@@ -14,7 +14,7 @@ public interface TokenRepository extends JpaRepository<Token,Long> {
     @Query("SELECT COALESCE(MAX(t.waitNo),0)+1 FROM Token t")
     Long selectNextWaitNumber();
 
-    @Query("SELECT COALESCE(COUNT(t.progressStatus), 0) FROM Token t WHERE t.status = :status")
+    @Query("SELECT COALESCE(COUNT(t.status), 0) FROM Token t WHERE t.status = :status")
     Long getProgressStatusCount(@Param("status") String status);
 
     Optional<Token> findByWaitNo(long nextWaitNo);

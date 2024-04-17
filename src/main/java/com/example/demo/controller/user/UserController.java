@@ -6,9 +6,8 @@ import com.example.demo.controller.user.dto.request.UserBalanceUpdateRequest;
 import com.example.demo.controller.user.dto.response.UserBalanceResponse;
 import com.example.demo.controller.user.dto.response.UserPaymentResponse;
 import com.example.demo.domain.payment.service.PaymentService;
-import com.example.demo.domain.token.JwtService;
+import com.example.demo.domain.token.service.TokenService;
 import com.example.demo.domain.user.service.UserService;
-import com.example.demo.domain.waiting.service.WaitingQueueService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
@@ -24,12 +23,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1/users")
 @RequiredArgsConstructor
 public class UserController {
-
-    private final WaitingQueueService waitingQueueService;
     private final UserService userService;
     private final PaymentService paymentService;
-
-    private final JwtService jwtService;
+    private final TokenService tokenService;
 
     @Operation(summary = "토큰 발급")
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(array = @ArraySchema(schema = @Schema(implementation = AvailableSeatResponse.class))))
@@ -38,7 +34,7 @@ public class UserController {
     })
     @PostMapping("/{userId}/token")
     public String createToken(@PathVariable Long userId){
-        return jwtService.createToken(userId);
+        return tokenService.createToken(userId);
     }
 
     @Operation(summary = "잔액 조회")

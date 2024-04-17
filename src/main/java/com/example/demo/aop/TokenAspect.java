@@ -1,6 +1,7 @@
 package com.example.demo.aop;
 
-import com.example.demo.domain.token.JwtService;
+import com.example.demo.domain.token.component.TokenValidator;
+import com.example.demo.domain.token.service.TokenService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.lang.JoinPoint;
@@ -20,7 +21,7 @@ public class TokenAspect {
     @Pointcut("@annotation(RequireValidToken)")
     public void requireValidToken(){}
 
-    private final JwtService jwtService;
+    private final TokenValidator tokenValidator;
 
     @Before("requireValidToken()")
     public void preProcess(JoinPoint joinPoint) throws Throwable{
@@ -29,6 +30,6 @@ public class TokenAspect {
         if(token ==null || !token.startsWith("Bearer ")){
             throw new RuntimeException("토큰이 유효하지 않습니다.");
         }
-        jwtService.getToken(token);
+        tokenValidator.isValid(token);
     }
 }

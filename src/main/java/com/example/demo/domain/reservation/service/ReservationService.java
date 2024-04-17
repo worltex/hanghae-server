@@ -3,6 +3,7 @@ package com.example.demo.domain.reservation.service;
 import com.example.demo.domain.concert.entity.Concert;
 import com.example.demo.domain.concert.entity.Seat;
 import com.example.demo.domain.concert.entity.Show;
+import com.example.demo.domain.concert.service.ConcertReaderService;
 import com.example.demo.domain.concert.service.ConcertService;
 import com.example.demo.domain.concert.service.SeatService;
 import com.example.demo.domain.concert.service.ShowService;
@@ -32,7 +33,7 @@ public class ReservationService {
     private final UserService userService;
     private final SeatService seatService;
     private final ShowService showService;
-    private final ConcertService concertService;
+    private final ConcertReaderService concertReaderService;
 
     public Set<Long> getAllReveredSeats(Long showId) {
         List<String> status = Arrays.asList("RESERVED", "RESERVING");
@@ -43,7 +44,7 @@ public class ReservationService {
     @Transactional
     public void reserveSeat(Long concertId, Long showId, Long seatId, Long userId) {
         reservationValidator.isReserved(showId,seatId);
-        Concert concert = concertService.findByConcertId(concertId);
+        Concert concert = concertReaderService.findByConcertId(concertId);
         User user = userService.findByUserId(userId);
         Seat seat = seatService.findBySeatId(seatId);
         Show show = showService.findByShowId(showId);

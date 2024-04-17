@@ -20,18 +20,18 @@ public class ConcertService {
     private final ShowValidator showValidator;
     private final ReservationService reservationService;
     private final HallService hallService;
-    private final ConcertRepository concertRepository;
+    private final ConcertReaderService concertReaderService;
 
     @Transactional(readOnly = true)
     public List<Show> getShowDates(Long concertId) {
-        List<Show> showDateList= findByConcertId(concertId).getShowDateList();
+        List<Show> showDateList= concertReaderService.findByConcertId(concertId).getShowDateList();
         showValidator.validShow(showDateList);
         return showDateList;
     }
 
     @Transactional(readOnly = true)
     public List<AvailableSeatResponse> getAvailableSeats(Long concertId, Long showId) {
-        Long hallId  = findByConcertId(concertId).getHallId();
+        Long hallId  = concertReaderService.findByConcertId(concertId).getHallId();
         List<Seat> allSeats = hallService.getAllSeats(hallId);
 
         Set<Long> reveredSeats = reservationService.getAllReveredSeats(showId);
@@ -39,11 +39,7 @@ public class ConcertService {
         return allSeats.stream().map(seat-> new AvailableSeatResponse(seat.getSeatId(), seat.getSeatNum(), reveredSeats.contains(seat.getSeatId()))).toList();
     }
 
-    @Transactional(readOnly = true)
-    public Concert findByConcertId(Long concertId) {
-        return concertRepository.findByConcertId(concertId)
-                .orElseThrow(()->new RuntimeException("콘서트 정보를 조회할 수 없습니다."));
-    }
+
 
 
 }

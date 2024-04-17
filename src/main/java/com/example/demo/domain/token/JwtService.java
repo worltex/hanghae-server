@@ -41,7 +41,7 @@ public class JwtService {
     public void getToken(String token){
         Claims claims = Jwts.parserBuilder().setSigningKey(getSecretKey()).build().parseClaimsJws(token).getBody();
         String userId = claims.getSubject();
-        userService.findUser(Long.valueOf(userId));
+        userService.findByUserId(Long.valueOf(userId));
     }
 
 }

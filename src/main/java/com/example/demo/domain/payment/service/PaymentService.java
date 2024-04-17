@@ -27,7 +27,7 @@ public class PaymentService {
         paymentValidator.checkPay(payment);
         BigDecimal price = payment.getPaymentPrice();
 
-        User user = userService.findUser(userId);
+        User user = userService.findByUserId(userId);
         paymentValidator.checkBalance(price, user.getBalance());
 
         BigDecimal usedBalance = calculateBalance(payment);

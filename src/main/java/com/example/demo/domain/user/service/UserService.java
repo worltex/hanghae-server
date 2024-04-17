@@ -32,7 +32,7 @@ public class UserService {
     }
 
     @Transactional(readOnly = true)
-    public User findUser(Long userId) {
+    public User findByUserId(Long userId) {
         return userRepository.findByUserId(userId).orElseThrow(() -> new RuntimeException("사용자를 찾을 수 없습니다."));
     }
 }

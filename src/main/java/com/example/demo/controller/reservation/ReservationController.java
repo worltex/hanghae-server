@@ -30,7 +30,10 @@ public class ReservationController {
     })
     @RequireValidToken
     @PostMapping("/{showId}/seats/{seatId}")
-    public ResponseEntity<Void> reserveSeat(@PathVariable String seatId){
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<Void> reserveSeat(@PathVariable Long showId, @PathVariable Long seatId){
+        Long userId=1L;
+        Long concertId=1L;
+        reservationService.reserveSeat(concertId, showId, seatId, userId);
+        return null;
     }
 }

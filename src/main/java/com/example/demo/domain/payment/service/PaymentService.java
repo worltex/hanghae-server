@@ -51,7 +51,6 @@ public class PaymentService {
         try {
             // 5분 대기
             TimeUnit.MINUTES.sleep(5);
-
             paymentRepository.findByReservationId(reservationId).orElseThrow(() -> new TicketingException(TicketingErrorCode.ALREADY_RESERVED));
             return CompletableFuture.completedFuture(null);
         } catch (InterruptedException e) {

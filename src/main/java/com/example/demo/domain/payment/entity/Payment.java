@@ -25,6 +25,6 @@ public class Payment extends BaseEntity {
     private Long paymentId;
     private Long reservationId;
     private BigDecimal paymentPrice;
-    private String status;
     private ZonedDateTime paidAt;
+
 }

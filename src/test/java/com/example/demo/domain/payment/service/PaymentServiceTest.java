@@ -39,9 +39,8 @@ class PaymentServiceTest {
     public void 결제성공(){
         //given
         Long paymentId=1L;
-        Payment payment = new Payment(paymentId,1L,new BigDecimal(1000),"READY", null);
+        Payment payment = new Payment(paymentId,1L,new BigDecimal(1000), null);
         when(paymentRepository.findByPaymentId(paymentId)).thenReturn(Optional.of(payment));
-        doCallRealMethod().when(paymentValidator).checkPay(payment);
         when(userService.findByUserId(any())).thenReturn(new User(1L,new BigDecimal(2000)));
         doCallRealMethod().when(paymentValidator).checkBalance(any(),any());
 
@@ -57,9 +56,8 @@ class PaymentServiceTest {
     public void 결제상태_READY가아닌경우_실패(){
         //given
         Long paymentId=1L;
-        Payment payment = new Payment(paymentId,1L,new BigDecimal(1000),"COMPLETED", null);
+        Payment payment = new Payment(paymentId,1L,new BigDecimal(1000), null);
         when(paymentRepository.findByPaymentId(paymentId)).thenReturn(Optional.of(payment));
-        doCallRealMethod().when(paymentValidator).checkPay(payment);
 
         //when & then
         assertThrows(RuntimeException.class, ()->paymentService.pay(1L, 1L));
@@ -69,9 +67,8 @@ class PaymentServiceTest {
     public void 유저를찾지못한경우_실패(){
         //given
         Long paymentId=1L;
-        Payment payment = new Payment(paymentId,1L,new BigDecimal(1000),"READY", null);
+        Payment payment = new Payment(paymentId,1L,new BigDecimal(1000), null);
         when(paymentRepository.findByPaymentId(paymentId)).thenReturn(Optional.of(payment));
-        doCallRealMethod().when(paymentValidator).checkPay(payment);
 
         //when & then
         assertThrows(RuntimeException.class, ()->paymentService.pay(1L, 1L));
@@ -81,9 +78,8 @@ class PaymentServiceTest {
     public void 잔고가부족한경우_실패(){
         //given
         Long paymentId=1L;
-        Payment payment = new Payment(paymentId,1L,new BigDecimal(1000),"READY", null);
+        Payment payment = new Payment(paymentId,1L,new BigDecimal(1000), null);
         when(paymentRepository.findByPaymentId(paymentId)).thenReturn(Optional.of(payment));
-        doCallRealMethod().when(paymentValidator).checkPay(payment);
         when(userService.findByUserId(any())).thenReturn(new User(1L,new BigDecimal(500)));
         doCallRealMethod().when(paymentValidator).checkBalance(any(),any());
 

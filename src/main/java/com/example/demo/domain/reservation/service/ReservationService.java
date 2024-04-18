@@ -1,5 +1,6 @@
 package com.example.demo.domain.reservation.service;
 
+import com.example.demo.domain.payment.service.PaymentService;
 import com.example.demo.domain.reservation.entity.Reservation;
 import com.example.demo.domain.reservation.repository.ReservationRepository;
 import com.example.demo.domain.reservation.validator.ReservationValidator;
@@ -21,6 +22,7 @@ public class ReservationService {
 
     private final ReservationRepository reservationRepository;
     private final ReservationValidator reservationValidator;
+    private final PaymentService paymentService;
 
     public Set<Long> getAllReveredSeats(Long showId) {
         List<String> status = Arrays.asList("RESERVED", "RESERVING");
@@ -29,13 +31,17 @@ public class ReservationService {
     }
 
     @Transactional
-    //TODO event 발행
     public void reserveSeat(Long concertId, Long showId, Long seatId, Long userId) {
         reservationValidator.isReserved(showId,seatId);
+        Reservation reservation = null;
         try{
-            Reservation reservation= Reservation.makeReservation(concertId, showId, seatId,userId);
+            reservation= Reservation.makeReservation(concertId, showId, seatId,userId);
             reservationRepository.save(reservation);
+            paymentService.verifyPaymentAsync(reservation.getReservationId());
         }catch (OptimisticEntityLockException e){
+            throw new TicketingException(TicketingErrorCode.ALREADY_RESERVED);
+        }catch (TicketingException e){
+            reservation.updateStatus("FAILED");
             throw new TicketingException(TicketingErrorCode.ALREADY_RESERVED);
         }
     }

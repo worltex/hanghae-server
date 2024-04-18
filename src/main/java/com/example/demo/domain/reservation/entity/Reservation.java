@@ -35,4 +35,8 @@ public class Reservation extends BaseEntity {
                 .status("RESERVING")
                 .build();
     }
+
+    public void updateStatus(String status) {
+        this.status=status;
+    }
 }

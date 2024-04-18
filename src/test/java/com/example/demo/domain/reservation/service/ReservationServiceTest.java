@@ -15,7 +15,6 @@ import java.util.Arrays;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.Mockito.when;
@@ -31,7 +30,7 @@ class ReservationServiceTest {
     public void 예약된좌석조회_성공(){
         //given
         Long showId=1L;
-        when(reservationRepository.findAllByShowIdAndStatusIn(any(), anyList())).thenReturn(Arrays.asList(new Reservation(1L,1L,1L,1L,new Seat(1L,1,new BigDecimal(1000)),"RESERVED", ZonedDateTime.now())));
+        when(reservationRepository.findAllByShowIdAndStatusIn(any(), anyList())).thenReturn(Arrays.asList(new Reservation(1L,1L,1L,1L,1L,"RESERVED", ZonedDateTime.now(), 1L)));
 
         //when
         Set<Long> reservedSeatSet = reservationService.getAllReveredSeats(showId);

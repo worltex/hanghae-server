@@ -42,7 +42,7 @@ class PaymentServiceTest {
         Payment payment = new Payment(paymentId,1L,new BigDecimal(1000),"READY", null);
         when(paymentRepository.findByPaymentId(paymentId)).thenReturn(Optional.of(payment));
         doCallRealMethod().when(paymentValidator).checkPay(payment);
-        when(userService.findUser(any())).thenReturn(new User(1L,new BigDecimal(2000)));
+        when(userService.findByUserId(any())).thenReturn(new User(1L,new BigDecimal(2000)));
         doCallRealMethod().when(paymentValidator).checkBalance(any(),any());
 
         //when
@@ -84,7 +84,7 @@ class PaymentServiceTest {
         Payment payment = new Payment(paymentId,1L,new BigDecimal(1000),"READY", null);
         when(paymentRepository.findByPaymentId(paymentId)).thenReturn(Optional.of(payment));
         doCallRealMethod().when(paymentValidator).checkPay(payment);
-        when(userService.findUser(any())).thenReturn(new User(1L,new BigDecimal(500)));
+        when(userService.findByUserId(any())).thenReturn(new User(1L,new BigDecimal(500)));
         doCallRealMethod().when(paymentValidator).checkBalance(any(),any());
 
         //when & then

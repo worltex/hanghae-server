@@ -87,7 +87,7 @@ class UserServiceTest {
         when(userRepository.findByUserId(userId)).thenReturn(Optional.of(new User(1L, BigDecimal.valueOf(1000))));
 
         //when
-        User response = userService.findUser(userId);
+        User response = userService.findByUserId(userId);
 
         //then
         assertThat(response.getUserId()).isEqualTo(userId);
@@ -99,7 +99,7 @@ class UserServiceTest {
         Long userId=1L;
 
         //when & then
-        assertThrows(RuntimeException.class, ()->userService.findUser(userId));
+        assertThrows(RuntimeException.class, ()->userService.findByUserId(userId));
     }
 
 }

@@ -33,7 +33,7 @@ public class PaymentService {
         BigDecimal usedBalance = calculateBalance(payment);
         user.updateBalance(usedBalance);
 
-        return new UserPaymentResponse(userId, user.getBalance().subtract(price));
+        return new UserPaymentResponse(userId, user.getBalance());
 
     }
 
